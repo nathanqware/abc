@@ -1,7 +1,11 @@
-build:
-  image: shouldbee/coffeescript
-  commands:
-    - npm install
-    - coffee --compile -o lib/ src/
-    - cp lib/config.sample.js lib/config.js
-    - npm test
+pipeline:  
+  build:
+    image: golang:${GO_VERSION}
+    commands:
+      - go get
+      - go build
+      - go test
+
+matrix:  
+  GO_VERSION:
+    - 1.7
